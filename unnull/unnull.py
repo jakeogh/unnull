@@ -25,5 +25,8 @@ def cli():
     null =True
     end = '\n'
     for index, line in enumerate_input(iterator=None,
+                                       head=None,
+                                       skip=None,
+                                       tail=None,
                                        null=null,):
         print(line, end=end)
