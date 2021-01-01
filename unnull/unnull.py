@@ -22,11 +22,11 @@ from enumerate_input import enumerate_input
 
 
 def cli():
-    null =True
+    null = True
     end = '\n'
     for index, line in enumerate_input(iterator=None,
-                                       head=None,
-                                       skip=None,
-                                       tail=None,
+                                       head=False,
+                                       skip=False,
+                                       tail=False,
                                        null=null,):
         print(line, end=end)
