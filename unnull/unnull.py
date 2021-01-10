@@ -28,5 +28,7 @@ def cli():
                                        head=False,
                                        skip=False,
                                        tail=False,
+                                       verbose=False,
+                                       debug=False,
                                        null=null,):
         print(line, end=end)
