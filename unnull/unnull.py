@@ -24,7 +24,7 @@ from enumerate_input import enumerate_input
 
 def cli():
     verbose = False
-    if len(sys.argv) >= 1:
+    if len(sys.argv) >= 2:
         if sys.argv[1] == '--verbose':
             verbose = True
         else:
