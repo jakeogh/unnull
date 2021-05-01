@@ -31,4 +31,7 @@ def cli():
                                        verbose=False,
                                        debug=False,
                                        null=null,):
-        print(line, end=end)
+        try:
+            print(line, end=end)
+        except BrokenPipeError:
+            pass
