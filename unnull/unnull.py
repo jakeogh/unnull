@@ -44,5 +44,5 @@ def cli():
             print(line, end=end)
         except BrokenPipeError as e:
             if verbose:
-                print(e, file=sys.stderr)
+                print(sys.argv[0], e, file=sys.stderr)
             sys.exit(1)
