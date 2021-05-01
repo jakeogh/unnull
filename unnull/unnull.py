@@ -17,6 +17,7 @@
 # pylint: disable=W0201  # attribute defined outside __init__
 # pylint: disable=R0916  # Too many boolean expressions in if statement
 
+import sys
 
 from enumerate_input import enumerate_input
 
@@ -34,4 +35,4 @@ def cli():
         try:
             print(line, end=end)
         except BrokenPipeError:
-            pass
+            sys.exit(1)
