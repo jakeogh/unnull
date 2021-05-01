@@ -23,6 +23,14 @@ from enumerate_input import enumerate_input
 
 
 def cli():
+    verbose = False
+    if len(sys.argv) >= 1:
+        if sys.argv[1] == '--verbose':
+            verbose = True
+        else:
+            print(sys.argv[0], 'Error: --verbose is the only option.', file=sys.stderr)
+            sys.exit(1)
+
     null = True
     end = '\n'
     for index, line in enumerate_input(iterator=None,
@@ -34,5 +42,7 @@ def cli():
                                        null=null,):
         try:
             print(line, end=end)
-        except BrokenPipeError:
+        except BrokenPipeError as e:
+            if verbose:
+                print(e, file=sys.stderr)
             sys.exit(1)
