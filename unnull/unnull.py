@@ -48,7 +48,7 @@ def cli():
     #                                   null=null,):
     for line in iterator:
         try:
-            print(line, end=end)
+            sys.stdout.buffer.write(line + end)
         except BrokenPipeError as e:
             if verbose:
                 print(sys.argv[0], e, file=sys.stderr)
