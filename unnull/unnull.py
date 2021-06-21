@@ -19,7 +19,8 @@
 
 import sys
 
-from enumerate_input import enumerate_input
+#from enumerate_input import enumerate_input
+from enumerate_input import read_by_byte
 
 
 def cli():
@@ -32,14 +33,20 @@ def cli():
             sys.exit(1)
 
     null = True
-    end = '\n'
-    for index, line in enumerate_input(iterator=None,
-                                       head=False,
-                                       skip=False,
-                                       tail=False,
-                                       verbose=False,
-                                       debug=False,
-                                       null=null,):
+    end = b'\n'
+    iterator = read_by_byte(sys.stdin.buffer,
+                            byte=b'\n',
+                            verbose=False,
+                            debug=False)
+
+    #for index, line in enumerate_input(iterator=None,
+    #                                   head=False,
+    #                                   skip=False,
+    #                                   tail=False,
+    #                                   verbose=False,
+    #                                   debug=False,
+    #                                   null=null,):
+    for line in iterator:
         try:
             print(line, end=end)
         except BrokenPipeError as e:
