@@ -35,7 +35,7 @@ def cli():
     null = True
     end = b'\n'
     iterator = read_by_byte(sys.stdin.buffer,
-                            byte=b'\n',
+                            byte=b'\x00',
                             verbose=False,
                             debug=False)
 
