@@ -19,7 +19,6 @@
 
 import sys
 
-#from enumerate_input import enumerate_input
 from enumerate_input import read_by_byte
 
 
@@ -29,23 +28,17 @@ def cli():
         if sys.argv[1] == '--verbose':
             verbose = True
         else:
-            print(sys.argv[0], 'Error: --verbose is the only option.', file=sys.stderr)
+            print(sys.argv[0],
+                  'Error: --verbose is the only option.',
+                  file=sys.stderr,)
             sys.exit(1)
 
-    null = True
     end = b'\n'
     iterator = read_by_byte(sys.stdin.buffer,
                             byte=b'\x00',
                             verbose=False,
                             debug=False)
 
-    #for index, line in enumerate_input(iterator=None,
-    #                                   head=False,
-    #                                   skip=False,
-    #                                   tail=False,
-    #                                   verbose=False,
-    #                                   debug=False,
-    #                                   null=null,):
     for line in iterator:
         try:
             sys.stdout.buffer.write(line + end)
