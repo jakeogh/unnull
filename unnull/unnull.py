@@ -20,8 +20,6 @@
 import sys
 from typing import Union
 
-#from enumerate_input import read_by_byte
-
 
 def errexit():
     print(sys.argv[0],
@@ -58,17 +56,3 @@ def cli():
             if verbose:
                 print(sys.argv[0], e, file=sys.stderr)
             sys.exit(1)
-
-    #end = b'\n'
-    #iterator = read_by_byte(sys.stdin.buffer,
-    #                        byte=b'\x00',
-    #                        verbose=verbose,
-    #                        debug=False)
-
-    #for line in iterator:
-    #    try:
-    #        sys.stdout.buffer.write(line + end)
-    #    except BrokenPipeError as e:
-    #        if verbose:
-    #            print(sys.argv[0], e, file=sys.stderr)
-    #        sys.exit(1)
