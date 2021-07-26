@@ -18,25 +18,37 @@
 # pylint: disable=R0916  # Too many boolean expressions in if statement
 
 import sys
+from typing import Union
 
 from enumerate_input import read_by_byte
 
 
+def errexit():
+    print(sys.argv[0],
+          'Error: -v / --verbose is the only option.',
+          file=sys.stderr,)
+    sys.exit(1)
+
+
 def cli():
-    verbose = False
+    verbose: Union[bool, int] = False
     if len(sys.argv) >= 2:
-        if sys.argv[1] == '--verbose':
-            verbose = True
-        else:
-            print(sys.argv[0],
-                  'Error: --verbose is the only option.',
-                  file=sys.stderr,)
-            sys.exit(1)
+        for arg in sys.argv[1:]:
+            if arg.startswith('-v'):
+                for vee in arg[1:]:
+                    if vee == 'v':
+                        verbose += 1
+                    else:
+                        errexit()
+            if arg == '--verbose':
+                verbose += 1
+            else:
+                errexit()
 
     end = b'\n'
     iterator = read_by_byte(sys.stdin.buffer,
                             byte=b'\x00',
-                            verbose=False,
+                            verbose=verbose,
                             debug=False)
 
     for line in iterator:
