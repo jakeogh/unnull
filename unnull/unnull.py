@@ -36,12 +36,11 @@ def cli():
         for arg in sys.argv[1:]:
             if arg.startswith('-v'):
                 for vee in arg[1:]:
-                    print(vee)
                     if vee == 'v':
                         verbose += 1
                     else:
                         errexit()
-            if arg == '--verbose':
+            elif arg == '--verbose':
                 verbose += 1
             else:
                 errexit()
