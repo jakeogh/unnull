@@ -45,6 +45,11 @@ def cli():
             else:
                 errexit()
 
+    if verbose:
+        import inspect
+        depth = len(inspect.stack())
+        verbose += depth
+
     end = b'\n'
     iterator = read_by_byte(sys.stdin.buffer,
                             byte=b'\x00',
