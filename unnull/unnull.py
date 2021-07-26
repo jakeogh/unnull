@@ -20,7 +20,7 @@
 import sys
 from typing import Union
 
-from enumerate_input import read_by_byte
+#from enumerate_input import read_by_byte
 
 
 def errexit():
@@ -50,16 +50,25 @@ def cli():
         depth = len(inspect.stack())
         verbose += depth
 
-    end = b'\n'
-    iterator = read_by_byte(sys.stdin.buffer,
-                            byte=b'\x00',
-                            verbose=verbose,
-                            debug=False)
-
-    for line in iterator:
+    for chunk in iter(lambda: sys.stdin.buffer.read(1024), b""):
+        chunk = chunk.replace(b'\x00', b'\n')
         try:
-            sys.stdout.buffer.write(line + end)
+            sys.stdout.buffer.write(chunk)
         except BrokenPipeError as e:
             if verbose:
                 print(sys.argv[0], e, file=sys.stderr)
             sys.exit(1)
+
+    #end = b'\n'
+    #iterator = read_by_byte(sys.stdin.buffer,
+    #                        byte=b'\x00',
+    #                        verbose=verbose,
+    #                        debug=False)
+
+    #for line in iterator:
+    #    try:
+    #        sys.stdout.buffer.write(line + end)
+    #    except BrokenPipeError as e:
+    #        if verbose:
+    #            print(sys.argv[0], e, file=sys.stderr)
+    #        sys.exit(1)
