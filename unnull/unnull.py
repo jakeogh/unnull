@@ -51,7 +51,10 @@ def cli():
     buffer_size = 1024
     while True:
         chunk = sys.stdin.buffer.read(buffer_size)
-        buffer_size = len(chunk)
+        if len(chunk) < buffer_size:
+            buffer_size = len(chunk)
+            print('buffer_size:', buffer_size, file=sys.stderr)
+
         chunk = chunk.replace(b'\x00', b'\n')
         try:
             sys.stdout.buffer.write(chunk)
