@@ -49,9 +49,10 @@ def cli():
         verbose += depth
 
     buffer_size = 1024
-    for chunk in iter(lambda: sys.stdin.buffer.read(buffer_size), b""):
-        chunk = chunk.replace(b'\x00', b'\n')
+    while True:
+        chunk = sys.stdin.buffer.read(buffer_size)
         buffer_size = len(chunk)
+        chunk = chunk.replace(b'\x00', b'\n')
         try:
             sys.stdout.buffer.write(chunk)
         except BrokenPipeError as e:
