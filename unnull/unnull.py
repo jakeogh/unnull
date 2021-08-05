@@ -50,13 +50,13 @@ def cli():
         depth = len(inspect.stack())
         verbose += depth
 
-    buffer_size = 1024
+    buffer_size = 16
     while True:
         chunk = sys.stdin.buffer.read(buffer_size)
-        ic(chunk)
-        if len(chunk) < buffer_size:
-            buffer_size = len(chunk)
-            print('buffer_size:', buffer_size, file=sys.stderr)
+        #ic(buffer_size, len(chunk), chunk)
+        #if len(chunk) < buffer_size:
+        #    buffer_size = len(chunk)
+        #    print('buffer_size:', buffer_size, file=sys.stderr)
 
         chunk = chunk.replace(b'\x00', b'\n')
         try:
