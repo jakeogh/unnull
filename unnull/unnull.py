@@ -20,6 +20,8 @@
 import sys
 from typing import Union
 
+from asserttool import ic
+
 
 def errexit():
     print(sys.argv[0],
@@ -51,6 +53,7 @@ def cli():
     buffer_size = 1024
     while True:
         chunk = sys.stdin.buffer.read(buffer_size)
+        ic(chunk)
         if len(chunk) < buffer_size:
             buffer_size = len(chunk)
             print('buffer_size:', buffer_size, file=sys.stderr)
