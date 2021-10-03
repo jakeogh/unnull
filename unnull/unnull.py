@@ -63,6 +63,7 @@ def cli():
         chunk = chunk.replace(b'\x00', b'\n')
         try:
             sys.stdout.buffer.write(chunk)
+            sys.stdout.buffer.flush()
         except BrokenPipeError as e:
             if verbose:
                 print(sys.argv[0], e, file=sys.stderr)
