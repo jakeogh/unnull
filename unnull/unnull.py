@@ -53,8 +53,8 @@ def cli():
     buffer_size = 16
     while True:
         chunk = sys.stdin.buffer.read(buffer_size)
-        if not chunk:
-            break
+        #if not chunk:  # will strip newlines, make a different command
+        #    break
         #ic(buffer_size, len(chunk), chunk)
         #if len(chunk) < buffer_size:
         #    buffer_size = len(chunk)
